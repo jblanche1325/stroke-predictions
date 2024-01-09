@@ -1,5 +1,8 @@
 pandas
 numpy
 seaborn
-ydata_profiling
+matplotlib
+scikit-learn
+catboost
+lightgbm
 -e .
