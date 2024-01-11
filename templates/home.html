@@ -1,0 +1,133 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Stroke Prediction</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" placeholder="Enter your Gender" required>
+                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                <option value="Male">
+                    Male
+                </option>
+                <option value="Female">
+                    Female
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input class="form-control" type="number" name="age"
+                placeholder="Enter your Age" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Do you have hypertension?</label>
+            <select class="form-control" name="hypertension" placeholder="Hypertension?"
+                required>
+                <option class="placeholder" selected disabled value="">Select hypertension</option>
+                <option value=1>
+                    Yes
+                </option>
+                <option value=0>
+                    No
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Do you have heart disease?</label>
+            <select class="form-control" name="heart_disease" placeholder="Heart Disease?"
+                required>
+                <option class="placeholder" selected disabled value="">Select heart disease</option>
+                <option value=1>
+                    Yes
+                </option>
+                <option value=0>
+                    No
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ever married?</label>
+            <select class="form-control" name="ever_married" placeholder="Have you ever been married?"
+                required>
+                <option class="placeholder" selected disabled value="">Select marriage status</option>
+                <option value="Yes">
+                    Yes
+                </option>
+                <option value="No">
+                    No
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Work Type</label>
+            <select class="form-control" name="work_type" placeholder="Enter your work type" required>
+                <option class="placeholder" selected disabled value="">Select work type</option>
+                <option value="Private">
+                    Private
+                </option>
+                <option value="Self-employed">
+                    Self-Employed
+                </option>
+                <option value="Govt_job">
+                    Goverment Job
+                </option>
+                <option value="children">
+                    Stay at Home Parent
+                </option>
+                <option value="Never_worked">
+                    Never Worked
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Residence Type</label>
+            <select class="form-control" name="Residence_type" placeholder="What is your resident type?"
+                required>
+                <option class="placeholder" selected disabled value="">Select resident type</option>
+                <option value="Urban">
+                    Urban
+                </option>
+                <option value="Rural">
+                    Rural
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Avg. Glucose Level</label>
+            <input class="form-control" type="number" name="avg_glucose_level"
+                placeholder="Enter your avg. glucose level" min='50' max='300' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">BMI</label>
+            <input class="form-control" type="number" name="bmi"
+                placeholder="Enter your BMI" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Smoking Status</label>
+            <select class="form-control" name="smoking_status" placeholder="Enter your smoking status" required>
+                <option class="placeholder" selected disabled value="">Select smoking status</option>
+                <option value="formerly smoked">
+                    Formerly Smoked
+                </option>
+                <option value="never smoked">
+                    Never Smoked
+                </option>
+                <option value="smokes">
+                    Smoker
+                </option>
+                <option value="Unknown">
+                    Unknown
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your stroke probability" required />
+        </div>
+    </form>
+    <h2>
+       Probability of stroke: {{results}}
+    </h2>
+   <body>
+</html>

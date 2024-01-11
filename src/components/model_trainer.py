@@ -108,6 +108,7 @@ class ModelTrainer:
             )
 
             predicted = best_model.predict(X_test)
+            predicted_probabilities = best_model.predict_proba(X_test)
             recall = recall_score(y_test, predicted)
 
             return recall, best_model_name

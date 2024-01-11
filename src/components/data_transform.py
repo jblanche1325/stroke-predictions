@@ -31,8 +31,9 @@ class DataTransformation:
         '''
         try:
             # Define categorical and numeric features
-            categorical_features = ['gender', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'smoking_status']
+            categorical_features = ['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status']
             numeric_features = ['age', 'avg_glucose_level', 'bmi']
+            binary_features = ['hypertension', 'heart_disease']
 
             # Numeric transformer pipeline
             numeric_transformer = Pipeline(steps=[
