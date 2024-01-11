@@ -7,6 +7,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
+from src.components.data_transform import DataTransformation, DataTransformationConfig
+
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 @dataclass
 class DataExtractionConfig:
     train_data_path: str=os.path.join('interim', 'train.csv')
@@ -44,4 +49,10 @@ class DataExtraction:
         
 if __name__ == '__main__':
     obj = DataExtraction()
-    obj.initiate_data_extraction()
+    train_data, test_data = obj.initiate_data_extraction()
+
+    data_transformation = DataTransformation()
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_training(train_arr, test_arr))
