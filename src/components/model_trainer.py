@@ -34,6 +34,7 @@ class ModelTrainer:
                 test_array[:, :-1],
                 test_array[:, -1]
             )
+
             models = {
                 'Logistic Regression': LogisticRegression(),
                 'KNN': KNeighborsClassifier(),
@@ -45,11 +46,47 @@ class ModelTrainer:
                 'Light GBM': lgb.LGBMClassifier()
             }
 
+            params = {
+                'Logistic Regression': {
+                    'penalty': [None, 'l2']#,
+                    #'l1_ratio': [0, 0.25, 0.5, 0.75, 1]
+                },
+                'KNN': {
+                    'n_neighbors': [2, 3, 4, 5]
+                },
+                'Decision Tree': {
+                    'criterion': ['gini', 'entropy', 'log_loss'],
+                    'max_depth': [None, 1, 2],
+                    'max_features': [None, 'sqrt']
+                },
+                'Random Forest': {
+                    'n_estimators': [50, 100, 250, 500],
+                    'max_features': [None, 'sqrt']
+                },
+                'AdaBoost': {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.001, 0.01, 0.1, 0.5, 1]
+                },
+                'SVM': {
+                    'kernel': ['linear', 'poly', 'rbf'],
+                    'degree': [2, 3]
+                },
+                'Cat Boosting': {
+                    'iterations': [100, 200],
+                    'learning_rate': [0.001, 0.01, 0.1, 0.5, 1]
+                },
+                'Light GBM': {
+                    'num_iterations': [100, 200],
+                    'learning_rate': [0.001, 0.01, 0.1, 0.5, 1],
+                }
+            }
+
             model_report:dict = evaluate_models(X_train=X_train,
                                                 y_train=y_train,
                                                 X_test=X_test,
                                                 y_test=y_test,
-                                                models=models
+                                                models=models,
+                                                params=params
                                                 )
             
             best_model_score = max(sorted(model_report.values()))
@@ -73,7 +110,7 @@ class ModelTrainer:
             predicted = best_model.predict(X_test)
             recall = recall_score(y_test, predicted)
 
-            return recall
+            return recall, best_model_name
             
         except Exception as e:
             raise CustomException(e, sys)
