@@ -14,8 +14,8 @@ class PredictPipeline:
             model = load_object(file_path=model_path)
             preprocessor = load_object(file_path=preprocessor_path)
             data_transformed = preprocessor.transform(features)
-            preds = model.predict_proba(data_transformed)[1]
-            preds_percentage = format(preds, ".2%")
+            preds = model.predict_proba(data_transformed)[0][1]
+            preds_percentage = '{:.2%}'.format(preds)
             return preds_percentage
         except Exception as e:
             raise CustomException(e, sys)
